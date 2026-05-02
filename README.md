@@ -39,8 +39,21 @@ To continue training, please modify the script settings or reuse the same checkp
 ```bash
 python eval_tta.py --raf_path {your_rafdb_path} --checkpoint {your_checkpoint_path} --img_size 112 --batch_size 12 --workers 0 --tta_flip 1 --tta_fivecrop 0 --precise_bn_batches 800 --alpha 0.75
 ```
+
 ---
 
+## Checkpoints
+The checkpoint files are not included in this repository due to file size limits.
+
+Please download the required checkpoints from the following Google Drive folder and place them under:
+```text
+checkpoints/
+```
+
+Google Drive:
+- https://drive.google.com/drive/folders/1AZ8xEU1li87C68uFwHVv2lXZH1tuhLG4?usp=drive_link
+
+---
 
 ## License
 This repository is prepared for academic research and reproducibility purposes only.  
