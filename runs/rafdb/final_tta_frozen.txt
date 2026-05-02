@@ -1,0 +1,3 @@
+[load] missing: [] unexpected: []
+[SC-BN] blended with alpha=0.75
+[TTA] test acc = 0.8488
