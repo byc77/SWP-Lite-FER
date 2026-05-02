@@ -1,4 +1,4 @@
-# SWP-Lite++: ICCE-TW Conference Version
+# SWP-Lite-FER
 
 ## Environment
 - Python: 3.10.19
