@@ -16,7 +16,7 @@ It is recommended to use a virtual environment or Conda environment before runni
 ## Training
 Basic fine-tuning command:
 ```bash
-python finetune_min.py
+python train.py --name {experiment_name} --dataset {dataset_name} --data_root {dataset_path} --epochs {epochs} --batch_size {batch_size} --lr {learning_rate} --gpu_ids 0 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1
 ```
 
 Experimental Settings:
