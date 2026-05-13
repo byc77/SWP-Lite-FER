@@ -66,13 +66,6 @@ Google Drive:
 
 ---
 
-## Notes
-- `train.py` is used for standard training reproduction.
-- `eval_tta.py` is used for inference reproduction with a provided checkpoint.
-- `finetune_min.py` is retained for legacy fine-tuning experiments.
-
----
-
 ## License
 This repository is prepared for academic research and reproducibility purposes only.  
 Datasets are not redistributed in this repository.  
