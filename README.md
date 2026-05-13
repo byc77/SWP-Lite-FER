@@ -23,33 +23,23 @@ python train.py --name {experiment_name} --dataset {dataset_name} --data_root {d
 
 RAF-DB
 ```bash
-python train.py --name rafdb_swp_litepp --dataset rafdb --data_root "Datasets/RAF-DB" --num_classes 7 --epochs 8 --batch_size 64 --lr 8e-5 --gpu_ids 0 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1
+python train.py --name rafdb_full --dataset rafdb --data_root "Datasets/RAF-DB" --num_classes 7 --epochs 200 --batch_size 128 --lr 8e-5 --workers 4 --use_ffa 1 --use_swf 1 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1 --flip_cons 1
 ```
 
 FERPlus
 ```bash
-python train.py --name ferplus_swp_litepp --dataset ferplus --data_root "Datasets/FERPlus" --num_classes 8 --epochs 8 --batch_size 64 --lr 8e-5 --gpu_ids 0 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1
-```
-
-AffectNet
-```bash
-python train.py --name affectnet_swp_litepp --dataset affectnet --data_root "Datasets/AffectNet_ImageFolder" --num_classes 8 --epochs 8 --batch_size 64 --lr 8e-5 --gpu_ids 0 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1
-```
-
-Emo135
-```bash
-python train.py --name emo135_swp_litepp --dataset emo135 --data_root "Datasets/Emo135" --num_classes 135 --epochs 8 --batch_size 64 --lr 8e-5 --gpu_ids 0 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1
+python train.py --name ferplus_full --dataset ferplus --data_root "Datasets/FERPlus" --num_classes 8 --epochs 30 --batch_size 128 --lr 5e-6 --weight_decay 2e-3 --workers 4 --use_ffa 1 --use_swf 1 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1 --flip_cons 1
 ```
 ---
 
 ## Testing / Inference
-RAF-DB no-TTA
+Calibration Evaluation
 ```bash
-python eval_tta.py --raf_path "Datasets/RAF-DB" --checkpoint "checkpoints/best_rafdb_frozen.pth" --img_size 112 --batch_size 12 --workers 0 --tta_flip 0 --tta_fivecrop 0 --precise_bn_batches 800 --alpha 0.75 --save_confmat "runs/rafdb/cm_best_checkpoint_noTTA.csv"
+python ts_calibrate_eval_clean.py --dataset rafdb --data_root "Datasets/RAF-DB" --checkpoint "checkpoints/rafdb_full/best.pth" --num_classes 7 --batch_size 128 --workers 4 --gpu_ids 0 --precise_bn_batches 800 --alpha 0.75 --out_txt "runs/rafdb_full/calibration_ts.txt"
 ```
-RAF-DB flip-TTA
+CPU Deployment Profiling
 ```bash
-python eval_tta.py --raf_path "Datasets/RAF-DB" --checkpoint "checkpoints/best_rafdb_frozen.pth" --img_size 112 --batch_size 12 --workers 0 --tta_flip 1 --tta_fivecrop 0 --precise_bn_batches 800 --alpha 0.75 --save_confmat "runs/rafdb/cm_best_checkpoint_TTA.csv"
+python profile_swp_litepp.py --checkpoint "checkpoints/rafdb_full/best.pth" --device cpu --img_size 112 --warmup 50 --repeat 300 --num_threads 12 --out_txt "runs/rafdb_full/profile_cpu.txt"
 ```
 ---
 
@@ -58,7 +48,7 @@ The checkpoint files are not included in this repository due to file size limits
 
 Please download the required checkpoints from the following Google Drive folder and place them under:
 ```text
-checkpoints/
+checkpoints/rafdb_full/best.pth
 ```
 
 Google Drive:
