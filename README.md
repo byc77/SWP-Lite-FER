@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ## Training
 Basic training command:
 ```bash
-python train.py --name {experiment_name} --dataset {dataset_name} --data_root {dataset_path} --num_classes {num_classes} --epochs {epochs} --batch_size {batch_size} --lr {learning_rate} --gpu_ids 0 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1
+python train.py --name {experiment_name} --dataset {dataset_name} --data_root {dataset_path} --num_classes {num_classes} --epochs {epochs} --batch_size {batch_size} --lr {learning_rate} --workers 4 --use_ffa 1 --use_swf 1 --use_eca 1 --use_gcg 1 --use_pals 1 --use_afg 1 --flip_cons 1
 ```
 
 RAF-DB
@@ -57,12 +57,15 @@ Google Drive:
 ## Experimental Settings
 - Backbone: ResNet-18
 - Input size: 112 × 112
-- Epochs: 8
-- Learning rate: 8e-5
-- Batch size: 64
+- RAF-DB epochs: 200
+- FERPlus epochs: 30
+- RAF-DB learning rate: 8e-5
+- FERPlus learning rate: 5e-6
+- Batch size: 128
 - Optimizer: AdamW
-- Main modules: ECA, GCG, PALS, AFG
-- Inference: Precise-BN, alpha-blend, flip-TTA
+- Main modules: FFA, SWF, ECA, GCG, PALS, AFG, Flip-Consistency
+- Reported accuracy: best validation accuracy
+- Calibration: Precise-BN, alpha-blend, Temperature Scaling
 
 ---
 
